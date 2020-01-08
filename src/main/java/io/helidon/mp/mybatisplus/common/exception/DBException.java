@@ -2,7 +2,12 @@ package io.helidon.mp.mybatisplus.common.exception;
 
 public class DBException extends RuntimeException {
 
-    public DBException() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3190388786585850140L;
+
+	public DBException() {
         super();
     }
 
