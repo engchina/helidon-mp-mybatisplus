@@ -47,6 +47,8 @@ public final class Main {
         System.out.println("http://localhost:" + server.port() + "/greet");
     }
 
+
+
     /**
      * Start the server.
      * @return the created {@link Server} instance
@@ -66,4 +68,5 @@ public final class Main {
             LogManager.getLogManager().readConfiguration(is);
         }
     }
+
 }

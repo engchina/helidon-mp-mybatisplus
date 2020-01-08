@@ -1,5 +1,6 @@
 package io.helidon.mp.mybatisplus.service.impl;
 
+import io.helidon.mp.mybatisplus.common.exception.DBException;
 import io.helidon.mp.mybatisplus.entity.Employee;
 import io.helidon.mp.mybatisplus.entity.EmployeeExample;
 import io.helidon.mp.mybatisplus.mapper.EmployeeMapper;
@@ -40,7 +41,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public int insert(Employee record) {
 
-        return 0;
+        try {
+            int i = employeeMapper.insert(record);
+            return i;
+        } catch (Exception e) {
+            System.out.println("######" + e.getMessage());
+            throw new DBException(e.getMessage());
+        }
     }
 
     @Override

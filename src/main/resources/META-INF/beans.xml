@@ -23,4 +23,7 @@
                            http://xmlns.jcp.org/xml/ns/javaee/beans_2_0.xsd"
        version="2.0"
        bean-discovery-mode="annotated">
+<!--    <interceptors>-->
+<!--        <class>org.mybatis.cdi.LocalTransactionInterceptor</class>-->
+<!--    </interceptors>-->
 </beans>

@@ -7,4 +7,6 @@ import java.util.List;
 public interface EmployeeFacade {
 
     List<Employee> selectEmployeeByExample();
+
+    int insertEmployee(Employee employee);
 }

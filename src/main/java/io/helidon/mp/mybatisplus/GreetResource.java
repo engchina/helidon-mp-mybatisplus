@@ -60,7 +60,6 @@ public class GreetResource {
 
     private static final JsonBuilderFactory JSON = Json.createBuilderFactory(Collections.emptyMap());
 
-
     /**
      * The greeting message provider.
      */
@@ -76,7 +75,7 @@ public class GreetResource {
      * @param greetingConfig the configured greeting message
      */
     @Inject
-    public GreetResource(GreetingProvider greetingConfig, @Named("helidon") DataSource ds) {
+    public GreetResource(GreetingProvider greetingConfig, @Named("mybatisplus") DataSource ds) {
         this.greetingProvider = greetingConfig;
         GlobalConfig.ds = ds;
     }
@@ -144,12 +143,15 @@ public class GreetResource {
     @Path("/employees")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Employee> listEmployees() throws SQLException {
+    public List<Employee> listEmployees() {
 
         List<Employee> employees = employeeFacade.selectEmployeeByExample();
         employees.forEach(v -> {
             System.out.println(v.getEmployeeId() + ":" + v.getLastName() + " " + v.getFirstName());
         });
+
+        Employee employee = new Employee();
+        employeeFacade.insertEmployee(employee);
 
         return employees;
     }

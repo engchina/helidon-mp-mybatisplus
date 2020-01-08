@@ -11,13 +11,15 @@ import org.mybatis.cdi.SessionFactoryProvider;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.sql.DataSource;
 
-@ApplicationScoped
 public class SqlSessionFactoryProvider {
 
     @Produces
-    @SessionFactoryProvider
     @ApplicationScoped
+    @SessionFactoryProvider
     public SqlSessionFactory produceFactory() {
         TransactionFactory transactionFactory = new JdbcTransactionFactory();
         Environment environment = new Environment("product", transactionFactory, GlobalConfig.ds);
