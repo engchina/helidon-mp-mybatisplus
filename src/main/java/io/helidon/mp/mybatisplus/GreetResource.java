@@ -38,7 +38,9 @@ import javax.ws.rs.core.Response;
 
 import io.helidon.mp.mybatisplus.common.config.GlobalConfig;
 import io.helidon.mp.mybatisplus.entity.Employee;
+import io.helidon.mp.mybatisplus.entity.TUser;
 import io.helidon.mp.mybatisplus.facade.EmployeeFacade;
+import io.helidon.mp.mybatisplus.mapper.TUserMapper;
 
 /**
  * A simple JAX-RS resource to greet you. Examples:
@@ -157,6 +159,21 @@ public class GreetResource {
 		});
 
 		return employees;
+	}
+
+	@Inject
+	TUserMapper tuserMapper;
+
+	@Path("/users")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<TUser> listTUsers() {
+
+		System.out.println(("----- selectAll method test ------"));
+		List<TUser> userList = tuserMapper.selectList(null);
+		userList.forEach(System.out::println);
+
+		return userList;
 	}
 
 }
