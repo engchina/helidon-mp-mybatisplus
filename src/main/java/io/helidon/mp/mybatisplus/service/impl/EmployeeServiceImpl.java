@@ -11,6 +11,7 @@ import io.helidon.mp.mybatisplus.common.exception.DBException;
 import io.helidon.mp.mybatisplus.entity.Employee;
 import io.helidon.mp.mybatisplus.entity.EmployeeExample;
 import io.helidon.mp.mybatisplus.mapper.EmployeeMapper;
+import io.helidon.mp.mybatisplus.mapper.EmployeeMapperPlus;
 import io.helidon.mp.mybatisplus.service.EmployeeService;
 
 @RequestScoped
@@ -18,6 +19,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Inject
 	EmployeeMapper employeeMapper;
+
+	@Inject
+	EmployeeMapperPlus employeeMapperPlus;
 
 	public EmployeeServiceImpl() {
 
@@ -44,7 +48,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public int insert(Employee record) {
 
 		try {
-			int i = employeeMapper.insert(record);
+//			int i = employeeMapper.insert(record);
+			int i = employeeMapperPlus.insert(record);
 			return i;
 		} catch (Exception e) {
 			throw new DBException(e);

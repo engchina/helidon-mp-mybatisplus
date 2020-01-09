@@ -43,11 +43,14 @@ public class EmployeeFacadeImpl implements EmployeeFacade {
 
 		try {
 
-			Employee employee = new Employee();
-			employee.setEmployeeId(Math.random() + "");
-			employee.setLastName("Bill");
-			employee.setFirstName("Gates");
-			return employeeService.insert(employee);
+			for (int i = 0; i < 5; i++) {
+				Employee employee = new Employee();
+				employee.setEmployeeId("" + i);
+				employee.setLastName("Bill");
+				employee.setFirstName("Gates");
+				employeeService.insert(employee);
+			}
+			return 1;
 		} catch (DBException e) {
 			throw e;
 		}
