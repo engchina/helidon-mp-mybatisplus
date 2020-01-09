@@ -39,20 +39,17 @@ public class EmployeeFacadeImpl implements EmployeeFacade {
 	}
 
 	@Override
-	public int insertEmployee(Employee employee) {
+	public int insertEmployee() {
 
-		for (int i = 0; i < 10; i++) {
-			employee.setEmployeeId(i + "");
-			employee.setLastName("test1");
-			employee.setFirstName("test1");
-			try {
-				employeeService.insert(employee);
-			} catch (DBException e) {
-				throw e;
-			}
+		try {
+
+			Employee employee = new Employee();
+			employee.setEmployeeId(Math.random() + "");
+			employee.setLastName("Bill");
+			employee.setFirstName("Gates");
+			return employeeService.insert(employee);
+		} catch (DBException e) {
+			throw e;
 		}
-
-		return 0;
 	}
-
 }

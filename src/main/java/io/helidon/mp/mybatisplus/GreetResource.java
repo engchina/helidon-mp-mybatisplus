@@ -28,6 +28,7 @@ import javax.json.JsonObject;
 import javax.sql.DataSource;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -51,7 +52,7 @@ import io.helidon.mp.mybatisplus.facade.EmployeeFacade;
  * <p>
  * The message is returned as a JSON object.
  */
-@Path("/greet")
+@Path("/")
 @RequestScoped
 public class GreetResource {
 
@@ -140,9 +141,22 @@ public class GreetResource {
 			System.out.println(v.getEmployeeId() + ":" + v.getLastName() + " " + v.getFirstName());
 		});
 
-		Employee employee = new Employee();
-		employeeFacade.insertEmployee(employee);
+		return employees;
+	}
+
+	@Path("/employees")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Employee> insertEmployee() {
+
+		employeeFacade.insertEmployee();
+
+		List<Employee> employees = employeeFacade.selectEmployeeByExample();
+		employees.forEach(v -> {
+			System.out.println(v.getEmployeeId() + ":" + v.getLastName() + " " + v.getFirstName());
+		});
 
 		return employees;
 	}
+
 }

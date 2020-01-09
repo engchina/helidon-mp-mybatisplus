@@ -1,12 +1,12 @@
 package io.helidon.mp.mybatisplus.facade;
 
-import io.helidon.mp.mybatisplus.entity.Employee;
-
 import java.util.List;
+
+import io.helidon.mp.mybatisplus.entity.Employee;
 
 public interface EmployeeFacade {
 
-    List<Employee> selectEmployeeByExample();
+	List<Employee> selectEmployeeByExample();
 
-    int insertEmployee(Employee employee);
+	int insertEmployee();
 }

@@ -40,6 +40,7 @@ dependencies {
     compile 'oracle:oraclepki:8'
     compile 'oracle:osdt_core:8'
     compile 'oracle:osdt_cert:8'
+    compile 'org.projectlombok:lombok:1.18.10'
     runtime 'org.jboss:jandex:2.1.1.Final'
     runtime 'javax.activation:javax.activation-api:1.2.0'
     testCompile 'org.junit.jupiter:junit-jupiter-api:5.1.0'
