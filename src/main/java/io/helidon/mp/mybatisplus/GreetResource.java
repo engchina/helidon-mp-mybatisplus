@@ -36,10 +36,14 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import io.helidon.mp.mybatisplus.common.config.GlobalConfig;
 import io.helidon.mp.mybatisplus.entity.Employee;
 import io.helidon.mp.mybatisplus.entity.TUser;
 import io.helidon.mp.mybatisplus.facade.EmployeeFacade;
+import io.helidon.mp.mybatisplus.mapper.EmployeeMapperPlus;
 import io.helidon.mp.mybatisplus.mapper.TUserMapper;
 
 /**
@@ -57,6 +61,8 @@ import io.helidon.mp.mybatisplus.mapper.TUserMapper;
 @Path("/")
 @RequestScoped
 public class GreetResource {
+
+	private final static Logger logger = LoggerFactory.getLogger(GreetResource.class);
 
 	private static final JsonBuilderFactory JSON = Json.createBuilderFactory(Collections.emptyMap());
 
@@ -169,11 +175,65 @@ public class GreetResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<TUser> listTUsers() {
 
-		System.out.println(("----- selectAll method test ------"));
+		logger.info(("----- selectAll method test ------"));
 		List<TUser> userList = tuserMapper.selectList(null);
-		userList.forEach(System.out::println);
+		userList.forEach(user -> logger.info(user.toString()));
 
 		return userList;
+	}
+
+	@Path("/users")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	public TUser insertTUser() {
+
+		logger.info(("----- insert method test ------"));
+		TUser tuser = new TUser();
+//		String userId = UUID.randomUUID().toString();
+//		tuser.setId(userId);
+		tuser.setName("user1");
+		tuser.setAge(20);
+		tuser.setEmail("user1@example.org");
+
+		tuserMapper.insert(tuser);
+
+//		tuser = tuserMapper.selectById(userId);
+
+		return tuser;
+	}
+
+	@Inject
+	EmployeeMapperPlus employeeMapperPlus;
+
+	@Path("/plus/employees")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Employee> listEmployeesPlus() {
+
+		List<Employee> employees = employeeMapperPlus.selectList(null);
+		employees.forEach(v -> {
+			System.out.println(v.getEmployeeId() + ":" + v.getLastName() + " " + v.getFirstName());
+		});
+
+		return employees;
+	}
+
+	@Path("/plus/employees")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Employee> insertEmployeePlus() {
+
+		Employee employee = new Employee();
+		employee.setFirstName("Gates");
+		employee.setLastName("Bill");
+		employeeMapperPlus.insert(employee);
+
+		List<Employee> employees = employeeMapperPlus.selectList(null);
+		employees.forEach(v -> {
+			System.out.println(v.getEmployeeId() + ":" + v.getLastName() + " " + v.getFirstName());
+		});
+
+		return employees;
 	}
 
 }

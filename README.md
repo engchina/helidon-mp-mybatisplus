@@ -1,8 +1,58 @@
 # Added
+--------------------------------------------------------
+--  DDL for Table T_USER
+--------------------------------------------------------
+
+  CREATE TABLE "T_USER" 
+   (	"ID" VARCHAR2(50 BYTE), 
+	"NAME" VARCHAR2(30 BYTE), 
+	"AGE" NUMBER, 
+	"EMAIL" VARCHAR2(50 BYTE)
+   ) ;
+--------------------------------------------------------
+--  DDL for Index T_USER_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "T_USER_PK" ON "T_USER" ("ID") ;
+  
+--------------------------------------------------------
+--  Constraints for Table T_USER
+--------------------------------------------------------
+
+  ALTER TABLE "T_USER" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "T_USER" ADD CONSTRAINT "T_USER_PK" PRIMARY KEY ("ID");
+
+
+--------------------------------------------------------
+--  DDL for Table EMPLOYEE
+--------------------------------------------------------
+
+  CREATE TABLE "EMPLOYEE" 
+   (	"EMPLOYEE_ID" VARCHAR2(20 BYTE), 
+	"FIRST_NAME" VARCHAR2(20 BYTE), 
+	"LAST_NAME" VARCHAR2(20 BYTE)
+   ) ;
+--------------------------------------------------------
+--  DDL for Index EMPLOYEE_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "EMPLOYEE_PK" ON "EMPLOYEE" ("EMPLOYEE_ID") ;
+  
+--------------------------------------------------------
+--  Constraints for Table EMPLOYEE
+--------------------------------------------------------
+
+  ALTER TABLE "EMPLOYEE" MODIFY ("EMPLOYEE_ID" NOT NULL ENABLE);
+  ALTER TABLE "EMPLOYEE" ADD CONSTRAINT "EMPLOYEE_PK" PRIMARY KEY ("EMPLOYEE_ID");
+
+
 
 mvn install:install-file -Dfile=/path/to/ojdbc8.jar -DgroupId=com.oracle.jdbc -DartifactId=ojdbc8 -Dversion=18.3.0.0 -Dpackaging=jar
+
 mvn install:install-file -Dfile=/path/to/oraclepki.jar -DgroupId=com.oracle.jdbc -DartifactId=oraclepki -Dversion=18.3.0.0 -Dpackaging=jar
+
 mvn install:install-file -Dfile=/path/to/osdt_core.jar -DgroupId=com.oracle.jdbc -DartifactId=osdt_core -Dversion=18.3.0.0 -Dpackaging=jar
+
 mvn install:install-file -Dfile=/path/to/osdt_cert.jar -DgroupId=com.oracle.jdbc -DartifactId=osdt_cert -Dversion=18.3.0.0 -Dpackaging=jar
 
 <dependency>

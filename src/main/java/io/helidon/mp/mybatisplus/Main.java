@@ -65,7 +65,7 @@ public final class Main {
 	 * Configure logging from logging.properties file.
 	 */
 	private static void setupLogging() throws IOException {
-		try (InputStream is = Main.class.getResourceAsStream("/logging.properties")) {
+		try (InputStream is = Main.class.getResourceAsStream("/logback.xml")) {
 			LogManager.getLogManager().readConfiguration(is);
 		}
 	}
