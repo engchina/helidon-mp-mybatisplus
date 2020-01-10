@@ -30,6 +30,7 @@ public class SqlSessionFactoryProvider {
 //		Configuration configuration = new Configuration(environment);
 		Configuration configuration = new MybatisConfiguration(environment);
 		configuration.getTypeAliasRegistry().registerAliases("io.helidon.mp.mybatisplus.entity");
+		configuration.getTypeAliasRegistry().registerAliases("io.helidon.mp.mybatisplus.vo");
 		configuration.setMapUnderscoreToCamelCase(true);
 		configuration.addMappers("io.helidon.mp.mybatisplus.mapper");
 //		SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(configuration);

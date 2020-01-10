@@ -2,17 +2,12 @@ package io.helidon.mp.mybatisplus.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.toolkit.Constants;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 import io.helidon.mp.mybatisplus.entity.Emp;
 import io.helidon.mp.mybatisplus.vo.EmpVO;
 
-public interface EmpService {
-
-	List<Emp> selectList(@Param(Constants.WRAPPER) Wrapper<Emp> queryWrapper);
+public interface EmpService extends IService<Emp> {
 
 	List<EmpVO> getEmpVOList();
 }

@@ -1,9 +1,10 @@
 package io.helidon.mp.mybatisplus.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import java.util.List;
 
-import io.helidon.mp.mybatisplus.entity.Emp;
+import io.helidon.mp.mybatisplus.vo.EmpVO;
 
-public interface GreetService extends IService<Emp> {
+public interface GreetService {
 
+	List<EmpVO> getEmpVOList();
 }
