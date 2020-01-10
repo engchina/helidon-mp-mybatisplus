@@ -4,8 +4,7 @@ This example implements Helidon-MP and Mybatis Plus.
 
 ## Create Table
 
-=====
-
+```
   CREATE TABLE "DEPT" 
    (	"DEPTNO" NUMBER(2,0), 
 	"DNAME" VARCHAR2(14 BYTE), 
@@ -41,6 +40,8 @@ Insert into EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO) values (7844,'TUR
 Insert into EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO) values (7876,'ADAMS','CLERK',7788,to_date('87-05-23','RR-MM-DD'),1100,null,20);
 Insert into EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO) values (7900,'JAMES','CLERK',7698,to_date('81-12-03','RR-MM-DD'),950,null,30);
 Insert into EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO) values (7934,'MILLER','CLERK',7782,to_date('82-01-23','RR-MM-DD'),1300,null,10);
+```
+
 
 ## Modify ``microprofile-config.properties`` to correct url,user,password
 
