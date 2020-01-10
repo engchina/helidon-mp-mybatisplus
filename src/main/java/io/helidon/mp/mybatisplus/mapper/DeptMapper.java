@@ -4,9 +4,9 @@ import org.mybatis.cdi.Mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
-import io.helidon.mp.mybatisplus.entity.Employee;
+import io.helidon.mp.mybatisplus.entity.Dept;
 
 @Mapper
-public interface EmployeeMapperPlus extends BaseMapper<Employee> {
+public interface DeptMapper extends BaseMapper<Dept> {
 
 }

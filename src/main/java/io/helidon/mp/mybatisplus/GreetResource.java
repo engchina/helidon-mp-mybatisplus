@@ -28,7 +28,6 @@ import javax.json.JsonObject;
 import javax.sql.DataSource;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -40,11 +39,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import io.helidon.mp.mybatisplus.common.config.GlobalConfig;
-import io.helidon.mp.mybatisplus.entity.Employee;
-import io.helidon.mp.mybatisplus.entity.TUser;
-import io.helidon.mp.mybatisplus.facade.EmployeeFacade;
-import io.helidon.mp.mybatisplus.mapper.EmployeeMapperPlus;
-import io.helidon.mp.mybatisplus.mapper.TUserMapper;
+import io.helidon.mp.mybatisplus.entity.Dept;
+import io.helidon.mp.mybatisplus.entity.Emp;
+import io.helidon.mp.mybatisplus.facade.GreetFacade;
 
 /**
  * A simple JAX-RS resource to greet you. Examples:
@@ -72,7 +69,7 @@ public class GreetResource {
 	private final GreetingProvider greetingProvider;
 
 	@Inject
-	EmployeeFacade employeeFacade;
+	GreetFacade greetFacade;
 
 	/**
 	 * Using constructor injection to get a configuration property. By default this
@@ -139,101 +136,18 @@ public class GreetResource {
 		return JSON.createObjectBuilder().add("message", msg).build();
 	}
 
-	@Path("/employees")
+	@Path("/depts")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Employee> listEmployees() {
-
-		List<Employee> employees = employeeFacade.selectEmployeeByExample();
-		employees.forEach(v -> {
-			System.out.println(v.getEmployeeId() + ":" + v.getLastName() + " " + v.getFirstName());
-		});
-
-		return employees;
+	public List<Dept> listDepts() {
+		return greetFacade.selectDeptList();
 	}
 
-	@Path("/employees")
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<Employee> insertEmployee() {
-
-		employeeFacade.insertEmployee();
-
-		List<Employee> employees = employeeFacade.selectEmployeeByExample();
-		employees.forEach(v -> {
-			System.out.println(v.getEmployeeId() + ":" + v.getLastName() + " " + v.getFirstName());
-		});
-
-		return employees;
-	}
-
-	@Inject
-	TUserMapper tuserMapper;
-
-	@Path("/users")
+	@Path("/emps")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<TUser> listTUsers() {
-
-		logger.info(("----- selectAll method test ------"));
-		List<TUser> userList = tuserMapper.selectList(null);
-		userList.forEach(user -> logger.info(user.toString()));
-
-		return userList;
-	}
-
-	@Path("/users")
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	public TUser insertTUser() {
-
-		logger.info(("----- insert method test ------"));
-		TUser tuser = new TUser();
-//		String userId = UUID.randomUUID().toString();
-//		tuser.setId(userId);
-		tuser.setName("user1");
-		tuser.setAge(20);
-		tuser.setEmail("user1@example.org");
-
-		tuserMapper.insert(tuser);
-
-//		tuser = tuserMapper.selectById(userId);
-
-		return tuser;
-	}
-
-	@Inject
-	EmployeeMapperPlus employeeMapperPlus;
-
-	@Path("/plus/employees")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<Employee> listEmployeesPlus() {
-
-		List<Employee> employees = employeeMapperPlus.selectList(null);
-		employees.forEach(v -> {
-			System.out.println(v.getEmployeeId() + ":" + v.getLastName() + " " + v.getFirstName());
-		});
-
-		return employees;
-	}
-
-	@Path("/plus/employees")
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<Employee> insertEmployeePlus() {
-
-		Employee employee = new Employee();
-		employee.setFirstName("Gates");
-		employee.setLastName("Bill");
-		employeeMapperPlus.insert(employee);
-
-		List<Employee> employees = employeeMapperPlus.selectList(null);
-		employees.forEach(v -> {
-			System.out.println(v.getEmployeeId() + ":" + v.getLastName() + " " + v.getFirstName());
-		});
-
-		return employees;
+	public List<Emp> listEmps() {
+		return greetFacade.selectEmpList();
 	}
 
 }

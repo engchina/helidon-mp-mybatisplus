@@ -60,9 +60,9 @@
     <logger name="jdbc.sqlonly" level="info" />
 	<logger name="jdbc.sqltiming" level="info" />
 	<logger name="jdbc.resultsettable" level="info" />
-	<logger name="com.zaxxer.hikari.pool.HikariPool" level="debug" />
-	<logger name="com.baomidou" level="trace" />
-	<logger name="org.lazyluke" level="trace" />
+	<logger name="com.zaxxer.hikari.pool.HikariPool" level="info" />
+	<logger name="com.baomidou" level="info" />
+	<logger name="org.lazyluke" level="info" />
 	
 	<root level="info">
 		<appender-ref ref="STDOUT" />
