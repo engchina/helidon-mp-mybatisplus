@@ -29,10 +29,34 @@ public class SqlSessionFactoryProvider {
 				new Log4jdbcProxyDataSource(GlobalConfig.ds));
 //		Configuration configuration = new Configuration(environment);
 		Configuration configuration = new MybatisConfiguration(environment);
-//		configuration.getTypeAliasRegistry().registerAliases("io.helidon.mp.mybatisplus.entity");
+		configuration.getTypeAliasRegistry().registerAliases("io.helidon.mp.mybatisplus.entity");
+		configuration.setMapUnderscoreToCamelCase(true);
 		configuration.addMappers("io.helidon.mp.mybatisplus.mapper");
 //		SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(configuration);
 		SqlSessionFactory factory = new MybatisSqlSessionFactoryBuilder().build(configuration);
 		return factory;
 	}
+
+//	/**
+//	 * 分页插件
+//	 */
+//	@Produces
+//	@Dependent
+//	public PaginationInterceptor paginationInterceptor() {
+//		return new PaginationInterceptor();
+//	}
+//
+//	/**
+//	 * 打印 sql
+//	 */
+//	@Produces
+//	@Dependent
+//	public SqlExplainInterceptor sqlExplainInterceptor() {
+//		SqlExplainInterceptor sqlExplainInterceptor = new SqlExplainInterceptor();
+//		// 格式化sql语句
+//		Properties properties = new Properties();
+//		properties.setProperty("format", "true");
+//		sqlExplainInterceptor.setProperties(properties);
+//		return sqlExplainInterceptor;
+//	}
 }

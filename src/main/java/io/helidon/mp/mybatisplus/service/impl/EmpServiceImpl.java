@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import io.helidon.mp.mybatisplus.entity.Emp;
 import io.helidon.mp.mybatisplus.mapper.EmpMapper;
 import io.helidon.mp.mybatisplus.service.EmpService;
+import io.helidon.mp.mybatisplus.vo.EmpVO;
 
 @Dependent
 public class EmpServiceImpl implements EmpService {
@@ -21,6 +22,12 @@ public class EmpServiceImpl implements EmpService {
 	public List<Emp> selectList(Wrapper<Emp> queryWrapper) {
 
 		return empMapper.selectList(queryWrapper);
+	}
+
+	@Override
+	public List<EmpVO> getEmpVOList() {
+
+		return empMapper.getEmpVOList();
 	}
 
 }

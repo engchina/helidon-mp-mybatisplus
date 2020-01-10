@@ -13,6 +13,7 @@ import io.helidon.mp.mybatisplus.entity.Emp;
 import io.helidon.mp.mybatisplus.facade.GreetFacade;
 import io.helidon.mp.mybatisplus.service.DeptService;
 import io.helidon.mp.mybatisplus.service.EmpService;
+import io.helidon.mp.mybatisplus.vo.EmpVO;
 
 @RequestScoped
 @Transactional(rollbackFor = DBException.class)
@@ -34,6 +35,12 @@ public class GreetFacadeImpl implements GreetFacade {
 	public List<Emp> selectEmpList() {
 
 		return empService.selectList(null);
+	}
+
+	@Override
+	public List<EmpVO> selectEmpVOList() {
+
+		return empService.getEmpVOList();
 	}
 
 }

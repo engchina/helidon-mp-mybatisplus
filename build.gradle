@@ -42,7 +42,9 @@ dependencies {
     compile 'oracle:oraclepki:8'
     compile 'oracle:osdt_core:8'
     compile 'oracle:osdt_cert:8'
-    compile 'org.projectlombok:lombok:1.18.10'
+//    compile 'org.projectlombok:lombok:1.18.10'
+    // https://mvnrepository.com/artifact/p6spy/p6spy
+//    compile group: 'p6spy', name: 'p6spy', version: '3.8.7'
     compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
     compile group: 'org.lazyluke', name: 'log4jdbc-remix', version: '0.2.7'
     runtime 'org.jboss:jandex:2.1.1.Final'

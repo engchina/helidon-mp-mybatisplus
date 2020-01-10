@@ -42,6 +42,7 @@ import io.helidon.mp.mybatisplus.common.config.GlobalConfig;
 import io.helidon.mp.mybatisplus.entity.Dept;
 import io.helidon.mp.mybatisplus.entity.Emp;
 import io.helidon.mp.mybatisplus.facade.GreetFacade;
+import io.helidon.mp.mybatisplus.vo.EmpVO;
 
 /**
  * A simple JAX-RS resource to greet you. Examples:
@@ -150,4 +151,10 @@ public class GreetResource {
 		return greetFacade.selectEmpList();
 	}
 
+	@Path("/empvos")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<EmpVO> listEmpVOs() {
+		return greetFacade.selectEmpVOList();
+	}
 }
