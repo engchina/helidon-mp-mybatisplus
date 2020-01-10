@@ -53,8 +53,8 @@ vi src/main/resources/META-INF/microprofile-config.properties
 
 With JDK8+
 ```bash
-mvn package
-java -jar target/helidon-mp-mybatisplus.jar
+./gradlew build
+java -jar build/libs/helidon-mp-mybatisplus.jar
 ```
 
 ## Exercise the application

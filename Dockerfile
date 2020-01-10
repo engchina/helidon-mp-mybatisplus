@@ -15,20 +15,23 @@
 #
 
 # 1st stage, build the app
-FROM maven:3.5.4-jdk-9 as build
+FROM openjdk:8 as build
 
 WORKDIR /helidon
 
-# Create a first layer to cache the "Maven World" in the local repository.
+# Create a first layer to cache the "Gradle World" in the local repository.
 # Incremental docker builds will always resume after that, unless you update
 # the pom
-ADD pom.xml .
-RUN mvn package -DskipTests
+ADD build.gradle gradlew settings.gradle ./
+ADD gradle gradle
+ADD libs libs
+#RUN ./gradlew build -x :bootRepackage -x test --continue
+RUN ./gradlew build -x test --continue --no-daemon
 
-# Do the Maven build!
+# Do the Gradle build!
 # Incremental docker builds will resume here when you change sources
 ADD src src
-RUN mvn package -DskipTests
+RUN ./gradlew build --no-daemon
 RUN echo "done!"
 
 # 2nd stage, build the runtime image
@@ -36,8 +39,8 @@ FROM openjdk:8-jre-slim
 WORKDIR /helidon
 
 # Copy the binary built in the 1st stage
-COPY --from=build /helidon/target/helidon-mp-mybatisplus.jar ./
-COPY --from=build /helidon/target/libs ./libs
+COPY --from=build /helidon/build/libs/helidon-mp-mybatisplus.jar ./
+COPY --from=build /helidon/build/libs/libs ./libs
 
 CMD ["java", "-jar", "helidon-mp-mybatisplus.jar"]
 
